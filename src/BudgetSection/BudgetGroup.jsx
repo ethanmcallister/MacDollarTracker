@@ -35,7 +35,7 @@ export default function BudgetGroup({name, isGroupActivelyAdding, setIsGroupActi
             <div className="budget-group-add-item-container">
                 {isAddingItem && <AddBudgetItem addItem={addItem} setIsAddingItem={setIsAddingItem} setIsGroupActivelyAdding={setIsGroupActivelyAdding}/>}
             </div>
-            <div onClick={handleAddItem}>
+            <div onClick={handleAddItem} className="add-item-btn-container">
                 <p className="budget-group-btn">Add Item</p>
             </div>
         </div>

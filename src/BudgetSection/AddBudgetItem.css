@@ -1,3 +1,10 @@
+.budget-group-add-item-container {
+    width: 30%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .add-budget-item-container {
     width: 100%;
     display: flex;
@@ -13,4 +20,10 @@
     background-color: rgb(86, 85, 85);
     color: white;
     font-size: 1em;
+}
+
+.add-item-btn-container {
+    width: fit-content;
+    margin-left: 5%;
+    cursor: pointer;
 }
