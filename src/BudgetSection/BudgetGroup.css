@@ -1,0 +1,53 @@
+#budget-group-container {
+    margin: 5%;
+    border-radius: 15px;
+    padding: 0 5%;
+    background-color: rgb(45, 45, 45);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.budget-group-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: green;
+    width: 60%;
+    margin: 2% 0;
+}
+
+.budget-group-amounts-container {
+    width: 40%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.budget-group-planned, .budget-group-received {
+    color: rgb(80, 127, 210);
+}
+
+.budget-group-title-container {
+    width: 100%;
+    color: white;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.budget-group-btn {
+    color: rgb(80, 127, 210);
+    width: fit-content;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.budget-group-items-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

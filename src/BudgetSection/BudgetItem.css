@@ -1,0 +1,35 @@
+.budget-item-container {
+    border-bottom: 1px solid green;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    color: white
+}
+
+.item-title {
+    color: white;
+    width: 60%;
+    margin: 2% 0;
+}
+
+.item-budget {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.planned-budget {
+    cursor: text;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.planned-budget:hover {
+    background-color: rgb(86, 85, 85);
+    color: black;
+}

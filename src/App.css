@@ -1,0 +1,14 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+#wrapper {
+    background-color: rgb(27, 27, 27);
+    display: flex;
+    gap: 3%;
+}
