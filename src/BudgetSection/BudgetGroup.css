@@ -55,3 +55,34 @@
     align-items: center;
 
 }
+
+.budget-group-final-row {
+    width: 90%;
+    padding: 0 5%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-item-btn-container {
+    width: 50%;
+}
+
+.budget-group-totals-container {
+    width: 50%;
+
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.budget-total-amount {
+    text-align: right;
+    
+    width: 30%;
+}

@@ -51,8 +51,18 @@ export default function BudgetGroup({name, isGroupActivelyAdding, setIsGroupActi
             <div className="budget-group-add-item-container">
                 {isAddingItem && <AddBudgetItem addItem={addItem} setIsAddingItem={setIsAddingItem} setIsGroupActivelyAdding={setIsGroupActivelyAdding}/>}
             </div>
-            <div onClick={handleAddItem} className="add-item-btn-container">
-                <p className="budget-group-btn">Add Item</p>
+            <div className="budget-group-final-row">
+                <div onClick={handleAddItem} className="add-item-btn-container">
+                    <p className="budget-group-btn">Add Item</p>
+                </div>
+                <div className="budget-group-totals-container">
+                    <div className="budget-total-amount">
+                        <strong className="budget-total">$ 0.00</strong>
+                    </div>
+                    <div className="budget-total-amount">
+                        <strong className="budget-total">$ 0.00</strong>
+                    </div>
+                </div>
             </div>
         </div>
     )
