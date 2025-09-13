@@ -3,15 +3,11 @@ import './AddBudgetItem.css'
 
 export default function AddBudgetItem( {addItem, setIsAddingItem, setIsGroupActivelyAdding} ) {
 
-    const [item, setItem] = useState("");
+    const [itemName, setItemName] = useState("");
 
     const handleInputChange = (e) => {
-        if (e.target.value === '\n') {
-            console.log('enter pressed');
-            handleInputSubmit();
-        }
-        else if (e.target.value.length <= 30) {
-            setItem(e.target.value);
+        if (e.target.value.length <= 30) {
+            setItemName(e.target.value);
         }
     }
 
@@ -26,8 +22,8 @@ export default function AddBudgetItem( {addItem, setIsAddingItem, setIsGroupActi
     }
 
     const handleInputSubmit = () => {
-        if (item.length > 0) {
-            addItem(item);
+        if (itemName.length > 0) {
+            addItem(itemName, setItemName);
         }
         else {
             setIsAddingItem(false);                 
@@ -40,7 +36,7 @@ export default function AddBudgetItem( {addItem, setIsAddingItem, setIsGroupActi
             <input 
                 className="add-budget-item-input"
                 type="text"
-                value={item} 
+                value={itemName} 
                 onChange={(e) => handleInputChange(e)}
                 onBlur={handleInputSubmit}
                 onKeyDown={handleKeyDown}

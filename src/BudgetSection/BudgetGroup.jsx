@@ -8,8 +8,8 @@ export default function BudgetGroup({name, isGroupActivelyAdding, setIsGroupActi
     const [items, setItems] = useState([]);
     const [isAddingItem, setIsAddingItem] = useState(false);
 
-    const addItem = (item) => {
-        setItems([...items, <BudgetItem key={items.length} item={item}/>]);
+    const addItem = (itemName) => {
+        setItems([...items, { idx: items.length, itemName: itemName } ]);
         setIsGroupActivelyAdding(false);
         setIsAddingItem(false);
     }
@@ -19,6 +19,19 @@ export default function BudgetGroup({name, isGroupActivelyAdding, setIsGroupActi
         setIsGroupActivelyAdding(true);
         setIsAddingItem(true);
     }
+
+    const modifyItemName = (idx, newItemName) => {
+
+        // Create a new array with the updated item
+        const newItems = items.map((item, index) => {
+            if (index === idx) {
+                return { idx: index, itemName: newItemName };
+            }
+            return item;
+        });
+
+        setItems(newItems); // Update the state with the new array
+    };
 
     return (
         <div id="budget-group-container">
@@ -30,7 +43,10 @@ export default function BudgetGroup({name, isGroupActivelyAdding, setIsGroupActi
                 </div>
             </div>
             <div className="budget-group-items-container">
-                {items}
+                {items.map((item, index) => (
+                    <BudgetItem key={index} idx={item.idx} itemName={item.itemName} modifyItemName={modifyItemName} />
+                ))}
+
             </div>
             <div className="budget-group-add-item-container">
                 {isAddingItem && <AddBudgetItem addItem={addItem} setIsAddingItem={setIsAddingItem} setIsGroupActivelyAdding={setIsGroupActivelyAdding}/>}

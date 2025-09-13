@@ -1,30 +1,104 @@
 import { useState } from "react";
 import './BudgetItem.css'
 
-export default function BudgetItem( {item} ) {
+export default function BudgetItem( {idx, itemName, modifyItemName} ) {
 
-    // [isEditingPlanned, setIsEditingPlanned] = useState(false);
+    const [plannedAmount, setPlannedAmount] = useState(0);
+    const [receivedAmount, setReceivedAmount] = useState(0);
+    const [isEditingPlanned, setIsEditingPlanned] = useState(false);
+    const [isEditingItemName, setIsEditingItemName] = useState(false);
+    const [editedItemName, setEditedItemName] = useState("");
+
+    const handlePlannedClick = () => {
+        setIsEditingPlanned(true);
+    }
+
+    const handleInputChange = (e) => {
+        if (e.target.value.length <= 30) {
+            setEditedItemName(e.target.value);
+        }
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleInputSubmit();
+        }
+        else if (e.key === 'Escape') {
+            if (isEditingPlanned) {
+                setIsEditingPlanned(false);
+                return;
+            }
+            setIsEditingItemName(false);                 
+        }
+    }
+
+    const handleInputSubmit = () => {
+        if (editedItemName.length > 0 || isEditingPlanned) {
+            if (isEditingPlanned) {
+                setIsEditingPlanned(false);
+                return;
+            }
+            modifyItemName(idx, editedItemName);
+            setIsEditingItemName(false);
+        }
+        else {
+            setIsEditingItemName(false);                 
+        }
+    }
 
     return (
         <div className="budget-item-container">
-            <h4 className="item-title">{item}</h4>
-            <div className="item-budget">
-                <div className="budget-amount-container">
-                    <p 
-                        id="planned-budget" 
-                        className="budget-amount"
-                        onClick={() => alert("Clicked Received")}
+            <div className="budget-item-inner-container">
+                {isEditingItemName ? (
+                    <input
+                        type="text"
+                        className="modify-budget-item-input"
+                        // value={itemName}
+                        onChange={(e) => handleInputChange(e)}
+                        onBlur={handleInputSubmit} // Exit editing mode on blur
+                        onKeyDown={(e) => handleKeyDown(e)}
+                        placeholder={"Item Name"}
+                        autoFocus
+                    />
+                ) : (
+                    <h4
+                        className="item-title"
+                        onClick={() => setIsEditingItemName(true)}
                     >
-                    $0.00
-                    </p>
-                </div>
-                <div className="budget-amount-container">
-                    <p 
-                        id="received-amount" 
-                        className="budget-amount"
-                    >
-                    $0.00
-                    </p>
+                        {itemName}
+                    </h4>
+                )}
+                <div className="item-budget">
+                    <div className="budget-amount-container">
+                        {isEditingPlanned ? (
+                            <input
+                                type="text"
+                                className="planned-budget-input"
+                                onChange={(e) => setPlannedAmount(parseFloat(e.target.value))}
+                                onBlur={() => setIsEditingPlanned(false)} // Exit editing mode on blur
+                                onKeyDown={(e) => handleKeyDown(e)}
+                                placeholder={plannedAmount.toFixed(2)}
+                                autoFocus
+                            />
+                        ) : (
+                            <p
+                                id="planned-budget"
+                                className="budget-amount"
+                                onClick={handlePlannedClick}
+                            >
+                                $ {plannedAmount.toFixed(2)}
+                            </p>
+                        )}
+        
+                    </div>
+                    <div className="budget-amount-container">
+                        <p 
+                            id="received-amount" 
+                            className="budget-amount"
+                        >
+                        $ {receivedAmount.toFixed(2)}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
