@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import './BudgetItem.css'
 
-export default function BudgetItem( {idx, itemName, modifyItemName} ) {
+export default function BudgetItem( {idx, itemName, modifyItemName, addToPlannedAmount} ) {
 
     const [plannedAmount, setPlannedAmount] = useState(0);
     const [receivedAmount, setReceivedAmount] = useState(0);
-    const [isEditingPlanned, setIsEditingPlanned] = useState(false);
+    const [isEditingPlanned, setIsEditingPlanned] = useState(true);
     const [isEditingItemName, setIsEditingItemName] = useState(false);
     const [editedItemName, setEditedItemName] = useState("");
+
+    const plannedInputRef = useRef(null);
+    const plannedLastAmount = useRef(0);
+
+    // on initial render, focus the planned input
+    useEffect(() => {
+        plannedInputRef.current.focus();
+    }, [])
 
     const handlePlannedClick = () => {
         setIsEditingPlanned(true);
@@ -35,7 +43,7 @@ export default function BudgetItem( {idx, itemName, modifyItemName} ) {
     const handleInputSubmit = () => {
         if (editedItemName.length > 0 || isEditingPlanned) {
             if (isEditingPlanned) {
-                setIsEditingPlanned(false);
+                handlePlannedSubmit();
                 return;
             }
             modifyItemName(idx, editedItemName);
@@ -44,6 +52,12 @@ export default function BudgetItem( {idx, itemName, modifyItemName} ) {
         else {
             setIsEditingItemName(false);                 
         }
+    }
+
+    const handlePlannedSubmit = () => {
+        setIsEditingPlanned(false);
+        addToPlannedAmount(plannedAmount - plannedLastAmount.current);
+        plannedLastAmount.current = plannedAmount;
     }
 
     return (
@@ -72,6 +86,7 @@ export default function BudgetItem( {idx, itemName, modifyItemName} ) {
                     <div className="budget-amount-container">
                         {isEditingPlanned ? (
                             <input
+                                ref={plannedInputRef}
                                 type="text"
                                 className="planned-budget-input"
                                 onChange={(e) => setPlannedAmount(parseFloat(e.target.value))}

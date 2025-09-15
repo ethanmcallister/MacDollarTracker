@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import './AddBudgetItem.css'
+
 
 export default function AddBudgetItem( {addItem, setIsAddingItem, setIsGroupActivelyAdding} ) {
 
     const [itemName, setItemName] = useState("");
+    const addItemInputRef = useRef(null);
+
+    useEffect(() => {
+        addItemInputRef.current.focus();
+    })
 
     const handleInputChange = (e) => {
         if (e.target.value.length <= 30) {
@@ -31,9 +37,11 @@ export default function AddBudgetItem( {addItem, setIsAddingItem, setIsGroupActi
         }
     }
 
+
     return (
         <div className="add-budget-item-container">
             <input 
+                ref={addItemInputRef}
                 className="add-budget-item-input"
                 type="text"
                 value={itemName} 
