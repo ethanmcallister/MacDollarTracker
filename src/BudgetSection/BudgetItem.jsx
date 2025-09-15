@@ -1,13 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import './BudgetItem.css'
 
-export default function BudgetItem( {idx, itemName, modifyItemName, addToPlannedAmount} ) {
+export default function BudgetItem( {idx, itemName, modifyItemName, addToPlannedAmount, handleRemoveItem} ) {
 
     const [plannedAmount, setPlannedAmount] = useState(0);
     const [receivedAmount, setReceivedAmount] = useState(0);
     const [isEditingPlanned, setIsEditingPlanned] = useState(true);
     const [isEditingItemName, setIsEditingItemName] = useState(false);
     const [editedItemName, setEditedItemName] = useState("");
+    const [itemHovered, setItemHovered] = useState(false);
 
     const plannedInputRef = useRef(null);
     const plannedLastAmount = useRef(0);
@@ -61,7 +62,8 @@ export default function BudgetItem( {idx, itemName, modifyItemName, addToPlanned
     }
 
     return (
-        <div className="budget-item-container">
+        <div className="budget-item-container" onMouseOver= {() => setItemHovered(true)} onMouseOut={() => setItemHovered(false)}>
+            {itemHovered && <img onClick={() => handleRemoveItem(idx, plannedAmount)} className="trash-can" src="./src/assets/trash-can.svg" alt="trash can button" />}
             <div className="budget-item-inner-container">
                 {isEditingItemName ? (
                     <input

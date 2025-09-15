@@ -39,6 +39,13 @@ export default function BudgetGroup({name, isGroupActivelyAdding, setIsGroupActi
         setPlannedTotal(plannedTotal + amount);
     }
 
+    const handleRemoveItem = (idx, amount) => {
+        // create a copy of items (no changes)
+        const newItems = items.filter((item, index) => index !== idx);
+        setItems(newItems);
+        setPlannedTotal(plannedTotal - amount);
+    }
+
     return (
         <div id="budget-group-container">
             <div className="budget-group-title-container">
@@ -58,7 +65,7 @@ export default function BudgetGroup({name, isGroupActivelyAdding, setIsGroupActi
             </div>
             <div className="budget-group-items-container">
                 {items.map((item, index) => (
-                    <BudgetItem key={index} idx={item.idx} itemName={item.itemName} modifyItemName={modifyItemName} addToPlannedAmount={addToPlannedAmount} />
+                    <BudgetItem key={index} idx={item.idx} itemName={item.itemName} modifyItemName={modifyItemName} addToPlannedAmount={addToPlannedAmount} handleRemoveItem={handleRemoveItem} />
                 ))}
 
             </div>

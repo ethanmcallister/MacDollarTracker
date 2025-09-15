@@ -11,12 +11,13 @@
 }
 
 /* for selecting a budget item row */
-/* .budget-item-container:active {
+.budget-item-container:hover {
     border: 3px solid white;
     background-color: rgb(86, 85, 85);
     border-radius: 3px;
     width: 95%;
-} */
+    /* cursor: grab; */
+}
 
 .budget-item-inner-container {
     width: 100%;
@@ -85,4 +86,10 @@
     background-color: rgb(86, 85, 85);
     color: white;
     font-size: 1em;
+}
+
+.trash-can {
+    margin: 0 3% 0 0;
+    padding: 0;
+    cursor: pointer;
 }
