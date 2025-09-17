@@ -40,16 +40,27 @@ export default function BudgetGroup({name, isGroupActivelyAdding, setIsGroupActi
     }
 
     const handleRemoveItem = (idx, amount) => {
-        // create a copy of items (no changes)
-        const newItems = items.filter((item, index) => index !== idx);
+        // create a copy of items where the the idx of the item to be removed is set to -1
+        const newItems = items.map((item, index) => {
+            if (index === idx) {
+                return { idx: -1, itemName: "" };
+            }
+            return item;
+        });
         setItems(newItems);
         setPlannedTotal(plannedTotal - amount);
+    }
+
+    const handleClickGroupTitle = () => {
+        alert(`You clicked on the ${name} group title!`);
+        // Future feature: Edit group name
+        // another feature: remove group button and capability
     }
 
     return (
         <div id="budget-group-container">
             <div className="budget-group-title-container">
-                <h3 className="budget-group-title">{name}</h3>
+                <h3 onClick={handleClickGroupTitle} className="budget-group-title">{name}</h3>
                 <div className="budget-group-amounts-container">
                     <h4 
                         className="budget-group-planned"
@@ -65,6 +76,8 @@ export default function BudgetGroup({name, isGroupActivelyAdding, setIsGroupActi
             </div>
             <div className="budget-group-items-container">
                 {items.map((item, index) => (
+                    // only create a BudgetItem if the idx is not -1
+                    item.idx !== -1 &&
                     <BudgetItem key={index} idx={item.idx} itemName={item.itemName} modifyItemName={modifyItemName} addToPlannedAmount={addToPlannedAmount} handleRemoveItem={handleRemoveItem} />
                 ))}
 
