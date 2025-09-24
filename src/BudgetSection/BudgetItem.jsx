@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import useOutsideClick from '../hooks/useOutsideClick';
 import './BudgetItem.css'
 
 export default function BudgetItem( {idx, itemName, modifyItemName, addToPlannedAmount, handleRemoveItem} ) {
@@ -8,7 +9,7 @@ export default function BudgetItem( {idx, itemName, modifyItemName, addToPlanned
     const [isEditingPlanned, setIsEditingPlanned] = useState(true);
     const [isEditingItemName, setIsEditingItemName] = useState(false);
     const [editedItemName, setEditedItemName] = useState("");
-    const [itemHovered, setItemHovered] = useState(false);
+    const [itemClicked, setItemClicked] = useState(false);
 
     const plannedInputRef = useRef(null);
     const plannedLastAmount = useRef(0);
@@ -61,9 +62,36 @@ export default function BudgetItem( {idx, itemName, modifyItemName, addToPlanned
         plannedLastAmount.current = plannedAmount;
     }
 
+    const handleClickOutside = () => {
+        setItemClicked(false);
+    }
+
+    const ref = useOutsideClick(handleClickOutside);
+
+    let style;
+    if (itemClicked) {
+        style = {
+            border: '3px solid white',
+            backgroundColor: 'rgb(86, 85, 85)',
+            borderRadius: '3px',
+            width: '95%',
+        };
+    }
+    else {
+        style = {
+            width: '90%',
+            padding: '0 5%',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            color: 'white',
+        };
+    }
+    
+
     return (
-        <div className="budget-item-container" onMouseOver= {() => setItemHovered(true)} onMouseOut={() => setItemHovered(false)}>
-            {itemHovered && <img onClick={() => handleRemoveItem(idx, plannedAmount)} className="trash-can" src="./src/assets/trash-can.svg" alt="trash can button" />}
+        <div className="budget-item-container" onClick= {() => setItemClicked(true)} style={style} ref={ref} >
+            {itemClicked && <img onClick={() => handleRemoveItem(idx, plannedAmount)} className="trash-can" src="./src/assets/trash-can.svg" alt="trash can button" />}
             <div className="budget-item-inner-container">
                 {isEditingItemName ? (
                     <input
