@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 
 import './App.css'
 import Menu from './LeftMenu/Menu.jsx'
 import Budget from './BudgetSection/Budget.jsx'
-import TransactionSection from './TransactionSection/TransactionSection.jsx'
+import SummarySection from './SummarySection/SummarySection.jsx'
 
 function App() {
 
@@ -14,7 +12,7 @@ function App() {
     <div id='wrapper'>
       <Menu />
       <Budget />
-      <TransactionSection />
+      <SummarySection />
     </div>
     </>
   )
