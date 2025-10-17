@@ -1,0 +1,14 @@
+.summary-spending-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.summary-spending-item-name {
+    color: orange;
+}
+
+.summary-spending-item-amount {
+    color: white;
+}

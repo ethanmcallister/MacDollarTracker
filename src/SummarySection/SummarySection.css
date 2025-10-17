@@ -35,6 +35,14 @@
 
 .summary-tab {
     cursor: pointer;
+    color: rgb(80, 127, 210);
+    padding: 0 0 1rem 0;
+    font-size: large;
+    /* border-bottom: 3px solid rgb(80, 127, 210); */
+}
+
+#summary-transactions {
+    border-bottom: 3px solid rgb(80, 127, 210);
 }
 
 #transactions-list {
