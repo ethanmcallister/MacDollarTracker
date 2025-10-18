@@ -26,8 +26,10 @@ export default function SummarySection() {
             Summary
           </h2>
         </div>
-        {!isViewingSummary && <TransactionList />}
-        {isViewingSummary && <SummaryList />}
+        <div id="summary-content">
+          {!isViewingSummary && <TransactionList />}
+          {isViewingSummary && <SummaryList />}
+        </div>
       </div>
     </>
   );

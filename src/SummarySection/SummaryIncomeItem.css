@@ -1,0 +1,14 @@
+.summary-income-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.summary-income-item-name {
+    color: orange;
+}
+
+.summary-income-item-amount {
+    color: white;
+}

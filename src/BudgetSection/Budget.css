@@ -16,8 +16,9 @@
     position: fixed;
     top: 0;
     left: 10%;
-    width: 55%;
+    width: inherit;
     background-color: rgb(27, 27, 27);
+    z-index: 10;
 }
 
 #budget-title {
@@ -27,7 +28,6 @@
 }
 
 #budget-content {
-    /* border: 1px solid blue; */
     margin-top: 6vh;
     height: 100%;
 }
